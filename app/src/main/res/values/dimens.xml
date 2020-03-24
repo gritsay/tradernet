@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="logo_size">20dp</dimen>
+    <dimen name="title_margin_start">20dp</dimen>
+    <dimen name="title_margin_top">10dp</dimen>
+    <dimen name="code_margin_start">10dp</dimen>
+    <dimen name="code_text_size">16sp</dimen>
+    <dimen name="names_margin_top">12dp</dimen>
+    <dimen name="delta_margin_end">20dp</dimen>
+    <dimen name="delta_text_size">16sp</dimen>
+    <dimen name="names_text_size">12sp</dimen>
+    <dimen name="delta_details_text_size">12sp</dimen>
+</resources>

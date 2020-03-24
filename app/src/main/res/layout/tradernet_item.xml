@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/companyLogo"
+        android:layout_width="@dimen/logo_size"
+        android:layout_height="@dimen/logo_size"
+        android:layout_marginStart="@dimen/title_margin_start"
+        android:layout_marginLeft="@dimen/title_margin_start"
+        android:layout_marginTop="@dimen/title_margin_top"
+        android:contentDescription="@string/desc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/code_margin_start"
+        android:layout_marginLeft="@dimen/code_margin_start"
+        android:textSize="@dimen/code_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/companyLogo"
+        app:layout_constraintStart_toEndOf="@+id/companyLogo"
+        app:layout_constraintTop_toTopOf="@+id/companyLogo"
+        tools:text="FEES" />
+
+    <TextView
+        android:id="@+id/names"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/names_margin_top"
+        android:textSize="@dimen/names_text_size"
+        android:maxLength="21"
+        app:layout_constraintEnd_toStartOf="@+id/delta_details"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/companyLogo"
+        app:layout_constraintTop_toBottomOf="@+id/companyLogo"
+        tools:text="МСХ | ФСК ЕЭС ао" />
+
+    <TextView
+        android:id="@+id/delta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="149dp"
+        android:layout_marginLeft="149dp"
+        android:layout_marginEnd="@dimen/delta_margin_end"
+        android:layout_marginRight="@dimen/delta_margin_end"
+        android:background="@drawable/drawable_corner"
+        android:textSize="@dimen/delta_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/code"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/companyLogo"
+        app:layout_constraintTop_toTopOf="@+id/code"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="+3.37%" />
+
+    <TextView
+        android:id="@+id/delta_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/delta_details_text_size"
+        app:layout_constraintBottom_toBottomOf="@+id/names"
+        app:layout_constraintRight_toRightOf="@+id/delta"
+        tools:text="0.210 76(+0.006 88)" />
+
+    <View
+        style="@style/Divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@id/delta_details" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
