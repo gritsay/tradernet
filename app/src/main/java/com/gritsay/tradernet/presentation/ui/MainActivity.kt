@@ -15,8 +15,8 @@ import timber.log.Timber
 
 class MainActivity : AppCompatActivity(), MainActivityView {
 
-    private var presenter: MainActivityPresenter = MainActivityPresenter(this)
-    private var stocks: MutableList<Rate> = mutableListOf()
+    private val presenter: MainActivityPresenter = MainActivityPresenter(this)
+    private val traderAdapter = TraderAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,22 +26,22 @@ class MainActivity : AppCompatActivity(), MainActivityView {
         val tickers: MutableList<String> = mutableListOf()
 
         enumValues<Tickers>().joinToString {
-            tickers.add(it.String).toString()
+            tickers.add(it.String)
+            Timber.d(it.String).toString()
         }
-        val adapter = TraderAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = adapter
-        recyclerView.isNestedScrollingEnabled = false
+
+        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = traderAdapter
+        }
         presenter.start(tickers)
     }
 
 
-    override fun updateData(stocks: List <Rate>) {
+    override fun updateData(stocks: List<Rate>) {
         runOnUiThread {
-            this.stocks.clear()
-            this.stocks.addAll(stocks)
-            (recyclerView.adapter as TraderAdapter).updateAdapterData(stocks)
-            recyclerView.adapter?.notifyDataSetChanged() //TODO diff util
+            (recyclerView.adapter as TraderAdapter).diff(stocks.sortedBy { it.code })
         }
     }
 

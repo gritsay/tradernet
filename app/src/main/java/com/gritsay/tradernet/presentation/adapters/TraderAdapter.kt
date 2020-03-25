@@ -9,10 +9,12 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gritsay.tradernet.R
 import com.gritsay.tradernet.constants.Constants
 import com.gritsay.tradernet.data.model.Rate
+import com.gritsay.tradernet.utils.DiffCallback
 import com.squareup.picasso.Picasso
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.tradernet_item.view.*
@@ -23,7 +25,7 @@ import java.util.*
 class TraderAdapter : RecyclerView.Adapter<TraderAdapter.ViewHolder>() {
 
     private var decimalFormat = DecimalFormat("0.00")
-    private var items: List<Rate> = mutableListOf()
+    private var items: MutableList<Rate> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
@@ -33,10 +35,6 @@ class TraderAdapter : RecyclerView.Adapter<TraderAdapter.ViewHolder>() {
 
     override fun getItemCount(): Int {
         return this.items.size
-    }
-
-    fun updateAdapterData(items: List<Rate>) {
-        this.items = items
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,5 +122,13 @@ class TraderAdapter : RecyclerView.Adapter<TraderAdapter.ViewHolder>() {
         val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.drawable_corner)
         val wrappedDrawable = unwrappedDrawable?.let { DrawableCompat.wrap(it) }
         wrappedDrawable?.let { DrawableCompat.setTint(it, ContextCompat.getColor(context, color)) }
+    }
+
+    fun diff(rates: List<Rate>) {
+        val diffCallback = DiffCallback(this.items, rates)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.items.clear()
+        this.items.addAll(rates)
+        diffResult.dispatchUpdatesTo(this)
     }
 }
