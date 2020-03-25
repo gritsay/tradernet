@@ -91,7 +91,7 @@ class TradingSocketRepository(private val url: String) {
                                 }
                                 q.lastTradePrice?.let {value->
                                     stocks[q.code]?.previouslyPrice =
-                                        stocks[q.code]?.lastTradePrice!!
+                                        stocks[q.code]?.lastTradePrice
                                     stocks[q.code]?.lastTradePrice = value
                                 }
 
